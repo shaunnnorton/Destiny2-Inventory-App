@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from clan_info import Clan_Info
+from bungiecalls.clan_info import Clan_Info
 app = Flask(__name__)
 
 @app.route("/")

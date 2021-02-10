@@ -1,7 +1,7 @@
 import json
 import requests
 import time
-from player_info import Player_Info
+from bungiecalls.player_info import Player_Info
 from enviornment import APIKEY
 
 

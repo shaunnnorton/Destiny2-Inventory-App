@@ -1,7 +1,7 @@
 import requests
 import json
-from player_info import Player_Info
-from manifest_info import Manifest
+from bungiecalls.player_info import Player_Info
+from bungiecalls.manifest_info import Manifest
 from enviornment import APIKEY
 
 
