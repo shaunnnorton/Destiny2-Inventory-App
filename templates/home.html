@@ -10,9 +10,10 @@
 <body>
     <header>
         <h1>Enter Your Username/Gamertag:</h1>
-        <form action="/" method="GET">
-            <input id="User" name="User" type="text" value=''>
-            <button id="submit">GO</button>
+        <form action="/" method="POST">
+            {{form.csrf_token}}
+            {{form.gamertag}}
+            {{form.submit}}
         </form>
     </header>
     <main>
