@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="shortcut icon" href="../static/Juice Productions Logo.png"/>
+    <title>Whats up with my Clan?</title>
+</head>
+<body>
+    <header>
+        <h1>Enter Your Username/Gamertag:</h1>
+        <form action="/" method="GET">
+            <input id="User" name="User" type="text" value=''>
+            <button id="submit">GO</button>
+        </form>
+    </header>
+    <main>
+        <div id="Clan">
+            <h1 id="clan_name">{{clan_name}}</h1>
+            <ul id="players">
+                {% for player in clan_members %}
+                    <li class="clan_member">{{player}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main> 
+    
+</body>
+</html>
