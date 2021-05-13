@@ -5,10 +5,9 @@ from bungiecalls.manifest_info import Manifest
 from enviornment import APIKEY
 
 
-class Player_Characters(Player_Info, Manifest):
+class Player_Characters(Player_Info):
     def __init__(self,gamertag):
         super().__init__(gamertag)
-        Manifest.__init__(self)
         self.__Character1_raw = {}
         self.__Character2_raw = {}
         self.__Character3_raw = {}
@@ -23,12 +22,12 @@ class Player_Characters(Player_Info, Manifest):
         self.translate_classes()
         self.Characters_index = self.character_index()
         self.character_equipment()
+    
     def get_character_info(self):
         profile = self.profile      
         HEADERS = {"X-API-Key":APIKEY}
         index = 0
         for  _ in profile['Response']['profile']['data']['characterIds']:
-            
             response = requests.get(f'https://www.bungie.net/Platform//Destiny2/{self.memtype}/Profile/{self.member_id}/Character/{_}/?components=200,205',headers=HEADERS)
             character = response.json()
             if(index == 0):
@@ -39,21 +38,29 @@ class Player_Characters(Player_Info, Manifest):
                 self.__Character3_raw = character
             index += 1
         self.Characters_raw = {1:self.__Character1_raw, 2:self.__Character2_raw, 3:self.__Character3_raw}
-    
-    def translate_class(self,char_number):
+
+
+    # def translate_class(self,char_number):
+    #     hash = self.Characters_raw[char_number]["Response"]['character']['data']['classHash']
+    #     #print(self._all_data['DestinyClassDefinition'][hash]['displayProperties']['name'])
+    #     return self._all_data['DestinyClassDefinition'][hash]['displayProperties']['name']
+
+    def translate_class_call(self,char_number):
         hash = self.Characters_raw[char_number]["Response"]['character']['data']['classHash']
-        #print(self._all_data['DestinyClassDefinition'][hash]['displayProperties']['name'])
-        return self._all_data['DestinyClassDefinition'][hash]['displayProperties']['name']
+        HEADERS = {"X-API-Key":APIKEY}
+        response= requests.get(f'https://www.bungie.net/Platform/Destiny2/Manifest/DestinyClassDefinition/{hash}/',headers=HEADERS)
+        json = response.json()
+        return json['Response']['displayProperties']['name']
     
     def make_dict(self):
-        self.Characters[self.translate_class(1)] = self.Character1
-        self.Characters[self.translate_class(2)] = self.Character2
-        self.Characters[self.translate_class(3)] = self.Character3
+        self.Characters[self.translate_class_call(1)] = self.Character1
+        self.Characters[self.translate_class_call(2)] = self.Character2
+        self.Characters[self.translate_class_call(3)] = self.Character3
 
     def translate_classes(self):
-        self.Character1['Class'] = self.translate_class(1)
-        self.Character2['Class'] = self.translate_class(2)
-        self.Character3['Class'] = self.translate_class(3)
+        self.Character1['Class'] = self.translate_class_call(1)
+        self.Character2['Class'] = self.translate_class_call(2)
+        self.Character3['Class'] = self.translate_class_call(3)
 
         
 
@@ -65,31 +72,39 @@ class Player_Characters(Player_Info, Manifest):
     def character_index(self):
         return list(self.Characters.keys())
 
-    def translate_equipment(self,smash):
-        hash = smash
-        #print(self._all_data['DestinyInventoryItemDefinition'][hash])
-        return self._all_data['DestinyInventoryItemDefinition'][hash]['displayProperties']['name']
-        
+    # def translate_equipment(self,smash):
+    #     hash = smash
+    #     #print(self._all_data['DestinyInventoryItemDefinition'][hash]['displayProperties']['icon'])
+    #     return self._all_data['DestinyInventoryItemDefinition'][hash]
+    
+    def translate_equipment_call(self, hash):
+        HEADERS = {"X-API-Key":APIKEY}
+        response= requests.get(f'https://www.bungie.net/Platform/Destiny2/Manifest/DestinyInventoryItemDefinition/{hash}/',headers=HEADERS)
+        json = response.json()
+        return json['Response']
     
     def character_equipment(self):
-        temporatylist = []
+        tempoaray_list = []
         counter = 0
         for _ in self.__Character1_raw['Response']['equipment']['data']['items']:
-            temporatylist.append(self.translate_equipment(self.__Character1_raw['Response']['equipment']['data']['items'][counter]['itemHash']))
+            if counter not in [8,9,10,12,13,14,15,16]:
+                tempoaray_list.append(self.translate_equipment_call(self.__Character1_raw['Response']['equipment']['data']['items'][counter]['itemHash']))
             counter += 1
-        self.Character1['Equipment'] = temporatylist
-        temporatylist = []
+        self.Character1['Equipment'] = tempoaray_list
+        tempoaray_list = []
         counter = 0
         for _ in self.__Character2_raw['Response']['equipment']['data']['items']:
-            temporatylist.append(self.translate_equipment(self.__Character2_raw['Response']['equipment']['data']['items'][counter]['itemHash']))
+            if counter not in [8,9,10,12,13,14,15,16]:
+                tempoaray_list.append(self.translate_equipment_call(self.__Character2_raw['Response']['equipment']['data']['items'][counter]['itemHash']))
             counter += 1
-        self.Character2['Equipment'] = temporatylist
-        temporatylist = []
+        self.Character2['Equipment'] = tempoaray_list
+        tempoaray_list = []
         counter = 0
         for _ in self.__Character3_raw['Response']['equipment']['data']['items']:
-            temporatylist.append(self.translate_equipment(self.__Character3_raw['Response']['equipment']['data']['items'][counter]['itemHash']))
+            if counter not in [8,9,10,12,13,14,15,16]:
+                tempoaray_list.append(self.translate_equipment_call(self.__Character3_raw['Response']['equipment']['data']['items'][counter]['itemHash']))
             counter += 1
-        self.Character3['Equipment'] = temporatylist
+        self.Character3['Equipment'] = tempoaray_list
 
 
 

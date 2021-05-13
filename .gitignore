@@ -1,5 +1,5 @@
 env
-*.env
+.env
 Manifests/d2Manifest.content
 Manifests/d2manifest.pickle
 __pycache__

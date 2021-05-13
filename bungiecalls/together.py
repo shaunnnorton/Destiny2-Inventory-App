@@ -1,3 +1,4 @@
+#This is an Early textbased Version of this app to be run in command line and is no longer accurate!
 from player_characters import Player_Characters
 from clan_info import Clan_Info
 import json

@@ -48,15 +48,18 @@ class Clan_Info(Player_Info):
                 member_type = 'Member'
             else:
                 member_type = 'Begginner'
-                
-            #print(last_online)
-            #print(member_type)
-            if status == False:
-                #print(f"Clan {member_type} {player} was last online at {last_online}")
-                clan_members.append(f"Clan {member_type} {player} was last online at {last_online}")
-            else:
-                # print(f"Clan {member_type} {player} is Online")
-                clan_members.append(f"Clan {member_type} {player} is Online")
+            
+            clan_members.append({'member_type':member_type ,'name':player,'last_online':last_online,'status':status})
+  
+            # #print(last_online)
+            # #print(member_type)
+            # if status == False:
+            #     #print(f"Clan {member_type} {player} was last online at {last_online}")
+            #     #clan_members.append(f"Clan {member_type} {player} was last online at {last_online}")
+
+            # else:
+            #     # print(f"Clan {member_type} {player} is Online")
+            #     clan_members.append(f"Clan {member_type} {player} is Online")
             player_number+=1
         return clan_members
     def clan_details(self):
