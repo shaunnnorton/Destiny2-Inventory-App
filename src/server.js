@@ -28,12 +28,7 @@ app.get("/", async (req,res) => {
     //await res.send(iv)
 
 })
-async function Test() {
-    calls.get_profile('1','4611686018444606398')
-        .then(profile => {console.log(profile)})
-}
 
-//Test()
 
 
 app.listen(port, () => {
