@@ -18,17 +18,23 @@ app.set("views", "./src/views")
 
 let port = process.env.PORT
 
-app.get("/", (req,res) => {
-    calls.get_id("Docthunder58")
-    calls.get_profile('1','4611686018444606398')
-    calls.get_clan('4611686018444606398')
-    .then(result => {
-        translate.translate_clan_members(result)
-    })
-    
-    
-    res.send("fuck")
+app.get("/", async (req,res) => {
+    const id = await calls.get_id("Docthunder58")
+    //console.log(await calls.get_profile('1','4611686018444606398'))
+    const profile = await calls.get_profile('1','4611686018444606398')
+    const iv = await translate.translate_inventory_items(profile)
+    const clan = await calls.get_clan('4611686018444606398')
+    //await console.log([id,profile.characters,clan])
+    //await res.send(iv)
+
 })
+async function Test() {
+    calls.get_profile('1','4611686018444606398')
+        .then(profile => {console.log(profile)})
+}
+
+//Test()
+
 
 app.listen(port, () => {
     console.log(`Destiny app listening on port ${port}`)
