@@ -26,9 +26,9 @@ const translate_inventory_items = async player => {
     let inventory = []
     for(let char in player.characterEquipment.data){
         let char_number = char
-        console.log(player.profile.data.userInfo.membershipType)
+        //console.log(player.profile.data.userInfo.membershipType)
         let player_info = await api.character_info(char_number,player.profile.data.userInfo.membershipType,player.profile.data.userInfo.membershipId)
-        console.log(player_info)
+        //console.log(player_info)
         let t_items = []
         for(let i in player.characterEquipment.data[char].items){
             let item = player.characterEquipment.data[char].items[i]

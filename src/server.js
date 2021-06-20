@@ -2,8 +2,7 @@ require("dotenv").config()
 
 import express from "express"
 import handlebars from "express-handlebars"
-import calls from "./utils/api_calls.js"
-import translate from "./utils/translate.js"
+import routes from "./routes/index.js"
 
 
 const app = express()
@@ -18,16 +17,8 @@ app.set("views", "./src/views")
 
 let port = process.env.PORT
 
-app.get("/", async (req,res) => {
-    const id = await calls.get_id("Docthunder58")
-    //console.log(await calls.get_profile('1','4611686018444606398'))
-    const profile = await calls.get_profile('1','4611686018444606398')
-    const iv = await translate.translate_inventory_items(profile)
-    const clan = await calls.get_clan('4611686018444606398')
-    //await console.log([id,profile.characters,clan])
-    //await res.send(iv)
-
-})
+app.use("/",routes.main)
+app.use("/",routes.data)
 
 
 

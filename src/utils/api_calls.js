@@ -40,10 +40,10 @@ async function get_profile(mem_type, id) {
         // });
 };
 
-const get_clan = async (id) => {
+const get_clan = async (mem_id) => {
     let info = {};
     let res1 = await axios.get(
-        `https://www.bungie.net/Platform/GroupV2/User/1/${id}/0/1/`,
+        `https://www.bungie.net/Platform/GroupV2/User/1/${mem_id}/0/1/`,
         {
             headers: { "X-API-KEY": API_KEY },
         }
