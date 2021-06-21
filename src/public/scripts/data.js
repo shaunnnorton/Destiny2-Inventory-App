@@ -3,9 +3,11 @@ const axios = window.axios
 let username_input = document.querySelector(".username")
 let username_button = document.querySelector(".user_button")
 let script_holder = document.querySelector(".script_holder")
-
 let equipment_container = document.querySelector("#Equipment")
 let clan_container = document.querySelector("#Clan")
+let hidden_tag = document.getElementById("hidden_tag")
+
+
 let profile = Object()
 let member_id = ''
 let member_type = ''
@@ -17,7 +19,10 @@ console.log(script_holder)
 
 username_button.addEventListener("click",populate_data)
 
-
+if(hidden_tag.value != null) {
+    username_input.value =  hidden_tag.value
+    populate_data()
+}
 
 function update_equipment() {
     equipment_container.innerHTML = ""
@@ -63,9 +68,9 @@ function update_clan() {
         let member_label = document.createElement("p")
         member_label.classList.add("clan_member","list-group-item-action","list-group-item")
         if(clan.members[member].online == true) {
-            member_label.innerHTML = `<i>[${clan.members[member].memType}]</i> <strong>${clan.members[member].name}</strong> is online</a>`
+            member_label.innerHTML = `<a href="/${clan.members[member].name}"><i>[${clan.members[member].memType}]</i> <strong>${clan.members[member].name}</strong> is online</a>`
         }else{
-            member_label.innerHTML = `<i>[${clan.members[member].memType}]</i> <strong>${clan.members[member].name}</strong> is Offline (${clan.members[member].lastOnline})</a>`
+            member_label.innerHTML = `<a href="/${clan.members[member].name}"><i>[${clan.members[member].memType}]</i> <strong>${clan.members[member].name}</strong> is Offline (${clan.members[member].lastOnline})</a>`
         }
         clan_div.appendChild(member_label)
         
