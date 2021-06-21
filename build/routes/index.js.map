@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/routes/index.js"],"names":["data","main"],"mappings":";;;;;;;;;AAAA;;AACA;;eAEe;AAAEA,EAAAA,IAAI,EAAJA,gBAAF;AAAQC,EAAAA,IAAI,EAAJA;AAAR,C","sourcesContent":["import data from \"./data.js\";\nimport main from \"./main.js\";\n\nexport default { data, main };\n"],"file":"index.js"}
