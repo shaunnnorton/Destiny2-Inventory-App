@@ -127,3 +127,4 @@ async function get_characters(username) {
     characters = response.data
 }
 
+

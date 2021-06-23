@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/server.js",
     "clean": "rm -rf build && mkdir build",
-    "build-server": "babel -d ./build ./src -s",
-    "build": "npm run clean && npm run build-server"
+    "build-css": "sass ./src/public/styles/styles.css build/styles/styles.css",
+    "build-server": "babel -d ./build ./src -s && rm -rf ./build/public/scripts/* && cp ./src/public/scripts/* ./build/public/scripts",
+    "build": "npm run clean && npm run build-css && npm run build-server"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,8 @@
     "@babel/core": "^7.14.6",
     "@babel/node": "^7.14.5",
     "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.5"
+    "@babel/preset-env": "^7.14.5",
+    "sass": "^1.35.1"
   },
   "dependencies": {
     "axios": "^0.21.1",

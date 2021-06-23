@@ -17,7 +17,7 @@ header{
     top: 0;
     height: auto;
     align-items: center;
-    background-image: url(./Juice\ Productions\ Logo\ copy.png);
+    background-image: url("./Juice\ Productions\ Logo\ copy.png");
     background-size: 65px;
     background-repeat: no-repeat;
     background-position: right;
