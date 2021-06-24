@@ -5,6 +5,5 @@ Manifests/d2manifest.pickle
 __pycache__
 
 
-.babelrc
 package-lock.json
 node_modules
