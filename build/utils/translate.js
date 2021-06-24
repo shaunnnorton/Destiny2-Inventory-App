@@ -8,6 +8,13 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _api_calls = _interopRequireDefault(require("./api_calls.js"));
 
+// Imports
+
+/**
+ * Translates the role type and lastOnline date of a clan to human readable formats
+ * @param {object} clan - clan object to be translated 
+ * @returns {boolean} returns true when finished
+ */
 var translate_clan_members = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(clan) {
     var roles, i, lastOnDateMS, LOD;
@@ -25,8 +32,7 @@ var translate_clan_members = /*#__PURE__*/function () {
 
             for (i = 0; i < clan.members.length; i++) {
               clan.members[i].memType = roles[clan.members[i].memType];
-              lastOnDateMS = Date.now().valueOf() - Number(clan.members[i].lastOnline); //console.log(lastOnDateMS)
-
+              lastOnDateMS = Date.now().valueOf() - Number(clan.members[i].lastOnline);
               LOD = new Date(lastOnDateMS);
               clan.members[i].lastOnline = LOD.toLocaleString();
             }
@@ -45,6 +51,12 @@ var translate_clan_members = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+/**
+ * Translates teh inventory items and character items of a player object to human readable formats
+ * @param {object} player - Player object to translate inventory of 
+ * @returns {object[]} Array of objects containing characters and their items, class and lights
+ */
+
 
 var translate_inventory_items = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(player) {
@@ -54,7 +66,6 @@ var translate_inventory_items = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            //console.log(player)
             inventory = [];
             _context2.t0 = _regenerator["default"].keys(player.characterEquipment.data);
 
@@ -65,14 +76,12 @@ var translate_inventory_items = /*#__PURE__*/function () {
             }
 
             _char = _context2.t1.value;
-            char_number = _char; //console.log(player.profile.data.userInfo.membershipType)
-
+            char_number = _char;
             _context2.next = 7;
             return _api_calls["default"].character_info(char_number, player.profile.data.userInfo.membershipType, player.profile.data.userInfo.membershipId);
 
           case 7:
             player_info = _context2.sent;
-            //console.log(player_info)
             t_items = [];
             _context2.t2 = _regenerator["default"].keys(player.characterEquipment.data[_char].items);
 
@@ -83,8 +92,7 @@ var translate_inventory_items = /*#__PURE__*/function () {
             }
 
             i = _context2.t3.value;
-            item = player.characterEquipment.data[_char].items[i]; //console.log(item.itemHash)
-
+            item = player.characterEquipment.data[_char].items[i];
             _context2.next = 15;
             return _api_calls["default"].manifest_call(item.itemHash, "equipment");
 
@@ -122,5 +130,5 @@ var translate_inventory_items = /*#__PURE__*/function () {
 module.exports = {
   translate_clan_members: translate_clan_members,
   translate_inventory_items: translate_inventory_items
-};
+}; //Export Functions
 //# sourceMappingURL=translate.js.map

@@ -11,6 +11,7 @@ var _data = _interopRequireDefault(require("./data.js"));
 
 var _main = _interopRequireDefault(require("./main.js"));
 
+// Import then export route files
 var _default = {
   data: _data["default"],
   main: _main["default"]

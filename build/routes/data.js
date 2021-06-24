@@ -17,7 +17,11 @@ var _api_calls = _interopRequireDefault(require("../utils/api_calls.js"));
 
 var _translate = _interopRequireDefault(require("../utils/translate.js"));
 
-var router = (0, _express.Router)();
+//Imports
+// Initializes Router
+var router = (0, _express.Router)(); //--------------------------------ROUTES---------------------------------------
+// Route returning an object containing character information for a player
+
 router.post("/:username/characters", /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var characters;
@@ -43,7 +47,8 @@ router.post("/:username/characters", /*#__PURE__*/function () {
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
   };
-}());
+}()); // Route returning an object containing the id information of the username
+
 router.post("/:username/id", /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
     var id;
@@ -58,7 +63,6 @@ router.post("/:username/id", /*#__PURE__*/function () {
 
           case 2:
             id = _context2.sent;
-            //console.log(profile[0])
             res.send(id[0]);
 
           case 4:
@@ -72,7 +76,9 @@ router.post("/:username/id", /*#__PURE__*/function () {
   return function (_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
-}());
+}()); // Route returning an object containing the profile information from the
+// type and id prvided
+
 router.post("/:username/profile", /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
     var type, id, profile;
@@ -81,17 +87,15 @@ router.post("/:username/profile", /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             type = req.body.type;
-            id = req.body.id; //console.log([req,type,id])
-
+            id = req.body.id;
             _context3.next = 4;
             return _api_calls["default"].get_profile(type, id);
 
           case 4:
             profile = _context3.sent;
-            console.log(profile);
             res.send(profile);
 
-          case 7:
+          case 6:
           case "end":
             return _context3.stop();
         }
@@ -102,7 +106,9 @@ router.post("/:username/profile", /*#__PURE__*/function () {
   return function (_x5, _x6) {
     return _ref3.apply(this, arguments);
   };
-}());
+}()); // Route returning an object containing the clan information from memberid
+// provided
+
 router.post("/:username/clan", /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var clan_raw, clan;
@@ -120,7 +126,6 @@ router.post("/:username/clan", /*#__PURE__*/function () {
 
           case 5:
             clan = _context4.sent;
-            //console.log(clan_raw)
             res.send(clan_raw);
 
           case 7:
@@ -134,7 +139,8 @@ router.post("/:username/clan", /*#__PURE__*/function () {
   return function (_x7, _x8) {
     return _ref4.apply(this, arguments);
   };
-}());
+}()); //-------------------------------END ROUTES-------------------------------------
+
 var _default = router;
 exports["default"] = _default;
 //# sourceMappingURL=data.js.map

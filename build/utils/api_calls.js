@@ -8,11 +8,17 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _express = require("express");
+// Imports
+require("dotenv").config(); //Initilize ENV 
 
-require("dotenv").config();
 
-var API_KEY = process.env.APIKEY;
+var API_KEY = process.env.APIKEY; // Get API key
+
+/**
+ * Function to make an API call and return player's IDs
+ * @param {string} player_string - username of the player to search for
+ * @returns {object} Object containing useful information such as "DisplayName", "MemberType", "MembershipID"
+ */
 
 var get_id = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(player_string) {
@@ -44,6 +50,13 @@ var get_id = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
+/**
+ * Function to make and API call and return profile
+ * @param {string} mem_type - bungie Membership Type (provided by get_id())
+ * @param {string} id - bungie Membership Id (provided by get_id())
+ * @returns {object} Contains data from api call including last online and raw character data
+ */
+
 
 function get_profile(_x2, _x3) {
   return _get_profile.apply(this, arguments);
@@ -78,6 +91,11 @@ function _get_profile() {
 }
 
 ;
+/**
+ * Makes an API call for the clan of a member
+ * @param {string} mem_id - Bungie membership Id (provided by get_id()) 
+ * @returns {object} - Object containing the members of a clan as well as clan name and desctiption.
+ */
 
 var get_clan = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(mem_id) {
@@ -128,8 +146,10 @@ var get_clan = /*#__PURE__*/function () {
   };
 }();
 /**
+ * Cleans the data from a clan call
  * @param {Array} data - Array of users from clan call
  * @param {Object} info_store - the Object to store the member information
+ * @returns {object} returns the data array with members modified to include membertype, name, online, and lastOnline
  */
 
 
@@ -165,6 +185,13 @@ var grab_members = /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }();
+/**
+ * Makes API call to bungie Manifest
+ * @param {string} hash - Hash to query the Manifest for 
+ * @param {string} type - Type of to search the Manifest for Class or Equipment
+ * @returns {object} Object containing the name and icon of the item matching the hash
+ */
+
 
 var manifest_call = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(hash, type) {
@@ -203,6 +230,14 @@ var manifest_call = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+/**
+ * Makes and API call to get the light and class of a character
+ * @param {string} char_id - The id of the character to query for
+ * @param {string} mem_type - The membership type of the player to query for
+ * @param {string} mem_id - The membership id of the player to query for
+ * @returns {object} Object containing the character data class and light
+ */
+
 
 var character_info = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(char_id, mem_type, mem_id) {
@@ -221,15 +256,13 @@ var character_info = /*#__PURE__*/function () {
 
           case 3:
             response = _context5.sent;
-            //console.log(response.data.Response.character.data)
             character["light"] = response.data.Response.character.data.light;
             _context5.next = 7;
             return manifest_call(response.data.Response.character.data.classHash, "class");
 
           case 7:
             type = _context5.sent;
-            character["class"] = type.name; //console.log(character)
-
+            character["class"] = type.name;
             return _context5.abrupt("return", character);
 
           case 10:
@@ -243,8 +276,7 @@ var character_info = /*#__PURE__*/function () {
   return function character_info(_x9, _x10, _x11) {
     return _ref5.apply(this, arguments);
   };
-}(); //console.log(character_info('2305843009260839594','1','4611686018444606398'))
-
+}();
 
 module.exports = {
   get_id: get_id,
