@@ -11,37 +11,6 @@
     <div id="Clan" class="container">
 
     </div>
-    {{!-- <div id="Equipment" class="container">
-        <h1 id="equipment_label" class="row text-center font-weight-bold"><i>{{player.gamertag}}</i></h1>
-        <div id="equipment_list" class="list-group container">
-            {% for item in player.Characters_index %}
-                <button class="equipment_item list-group-item list-group-item-action row text-center">{{characters[item].Class}} {{characters[item].Light}}</button>
-                <ul class="row equipment_list_items list-group" style="display: none; ">
-                    {% for item in characters[item].Equipment %}
-                        <li class="col list-group-item">
-                            <img src="http://www.bungie.net{{item['displayProperties']['icon']}}" alt="">
-                            <strong>{{item['displayProperties']['name']}}</strong>
-                            
-                        </li>
-            
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        </div>
-    </div>
-    <div id="Clan" class="container">
-        <h1 id="clan_name" class="row">{{clan_name}}</h1>
-        <div id="players" class="list-group row">
-            {% for player in clan_members %}
-                {% if player.status %}
-                    <a href="/{{player.name}}"   class="clan_member list-group-item-action list-group-item"> <i>[{{player.member_type}}]</i> <strong>{{player.name}}</strong> is online</a>
-                {% else %}
-                    <a href="/{{player.name}}"   class="clan_member list-group-item-action list-group-item"> <i>[{{player.member_type}}]</i> <strong>{{player.name}}</strong> is Offline ({{player.last_online}})</a>
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-     --}}
 </main> 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <div class="script_holder">
