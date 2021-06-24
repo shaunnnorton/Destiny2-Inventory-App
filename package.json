@@ -10,7 +10,8 @@
     "build-css": "sass ./src/public/styles/styles.css build/styles/styles.css",
     "build-server": "babel -d ./build ./src -s && rm -rf ./build/public/scripts/* && cp ./src/public/scripts/* ./build/public/scripts/ && mkdir ./build/public/images && cp ./src/public/images/* ./build/public/images/",
     "build": "npm run clean && npm run build-css && npm run build-server",
-    "docs": "rm -rf ./docs && ./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.conf.json"
+    "docs": "rm -rf ./docs && ./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.conf.json",
+    "heroku-prebuild": "rm -rf node_modules"
   },
   "repository": {
     "type": "git",
