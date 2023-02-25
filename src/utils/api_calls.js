@@ -11,11 +11,11 @@ let API_KEY = process.env.APIKEY; // Get API key
  */
 const get_id = async (player_string) => {
     let id = await axios
-        .get(
-            `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer` +
-                `/-1/${player_string}`,
-            { headers: { "X-API-KEY": API_KEY } }
+        .post(
+            `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`,{displayName:"docthunder58",displayNameCode:"9451"},
+            { headers: { "X-API-KEY": API_KEY }}
         )
+    console.log(id.data)
     return id.data.Response
 };
 
@@ -33,7 +33,7 @@ async function get_profile(mem_type, id) {
             )}/Profile/` + `${String(id)}/?components=100,205`,
             { headers: { "X-API-KEY": API_KEY } }
         )
-    return profile.data.Response
+    return profile.data
 };
 
 /**

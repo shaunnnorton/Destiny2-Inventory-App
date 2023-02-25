@@ -115,6 +115,7 @@ async function get_id(username) {
     member_id = id.data.membershipId
     member_type = id.data.membershipType
     display_name = id.data.displayName
+    
 }
 
 /**
